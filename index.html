@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berkah Laundry - Laundry Bersih, Wangi, dan Cepat</title>
+<meta name="description" content="Berkah Laundry - Solusi laundry terpercaya untuk kebutuhan harian Anda.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],poppins:['Poppins','sans-serif']}}}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#f8fafc}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f5f9}::-webkit-scrollbar-thumb{background:#3b82f6;border-radius:3px}
+.pub-page{display:none}.pub-page.active{display:block}
+.hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#3b82f6 100%);position:relative;overflow:hidden}
+.hero-bg::before{content:'';position:absolute;top:-50%;right:-20%;width:80%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 60%);pointer-events:none}
+.hero-bg::after{content:'';position:absolute;bottom:-30%;left:-10%;width:60%;height:150%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 50%);pointer-events:none}
+.float-anim{animation:floaty 3s ease-in-out infinite}@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fade-up{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.16,1,.3,1)}.fade-up.visible{opacity:1;transform:translateY(0)}
+.card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(37,99,235,.12)}
+.pulse-dot{animation:pdot 2s infinite}@keyframes pdot{0%{box-shadow:0 0 0 0 rgba(37,99,235,.4)}70%{box-shadow:0 0 0 10px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+.nav-blur{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.glass{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15)}
+.text-gradient{background:linear-gradient(135deg,#2563eb,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.toast{position:fixed;top:20px;right:20px;z-index:9999;padding:16px 24px;border-radius:12px;color:#fff;font-weight:500;transform:translateX(120%);transition:transform .4s ease;box-shadow:0 10px 40px rgba(0,0,0,.2)}.toast.show{transform:translateX(0)}
+.toast-success{background:linear-gradient(135deg,#059669,#10b981)}.toast-error{background:linear-gradient(135deg,#dc2626,#ef4444)}.toast-info{background:linear-gradient(135deg,#2563eb,#3b82f6)}
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:1000;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:all .3s;cursor:pointer}.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,.5)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:9998;display:none;align-items:center;justify-content:center}.modal-overlay.active{display:flex}
+.admin-sidebar{background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%)}
+.stat-card{border-radius:16px;padding:24px;position:relative;overflow:hidden;color:#fff}.stat-card::after{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.1)}
+.status-badge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.admin-nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;color:#94a3b8;transition:all .15s;border:none;background:none;cursor:pointer;text-align:left}.admin-nav-btn:hover,.admin-nav-btn.active{background:rgba(255,255,255,.08);color:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#2563eb!important;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+</style>
+</head>
+<body class="text-slate-800">
+
+<div id="toast" class="toast"></div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/6285261856087?text=Halo%20kak%2C%20Saya%20ingin%20order%20layanan%20laundry.%20Berikut%20detail%20pesanan%20saya%3A%0A%0ANama%3A%20%0AAlamat%20Penjemputan%3A%20%0AJenis%20Laundry%3A%20%0AWaktu%20Penjemputan%3A%20%0A%0AMohon%20info%20total%20biaya%20dan%20estimasi%20selesai%20ya.%20Terima%20kasih" target="_blank" class="wa-float" id="waFloat" title="Chat WhatsApp">
+<svg width="28" height="28" fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAVBAR -->
+<nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<a href="#" onclick="goPage('home');return false" class="flex items-center gap-3 group">
+<img src="https://z-cdn-media.chatglm.cn/files/0daa9e86-dc41-45ff-a011-70b56da370f8.jpeg?auth_key=1879776924-c25b22cfca114eae837fe39595e97173-0-a912677efecefdb9cd2706888b62a95c" alt="Berkah Laundry" class="h-10 w-10 rounded-xl object-cover shadow-md">
+<span class="font-poppins font-bold text-xl text-blue-700">Berkah<span class="text-blue-400">Laundry</span></span>
+</a>
+<div class="hidden md:flex items-center gap-1">
+<a href="#" onclick="goPage('home');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Home</a>
+<a href="#" onclick="goPage('layanan');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Layanan</a>
+<a href="#" onclick="goPage('harga');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Harga</a>
+<a href="#" onclick="goPage('tentang');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Tentang Kami</a>
+<a href="#" onclick="goPage('artikel');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Artikel</a>
+<a href="#" onclick="goPage('kontak');return false" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Kontak</a>
+</div>
+<div class="flex items-center gap-3">
+<button onclick="goPage('admin-login');return false" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-blue-600 hover:bg-blue-50 border border-gray-200"><i data-lucide="shield" class="w-3.5 h-3.5"></i>Admin</button>
+<a href="https://wa.me/6285261856087?text=Halo%20kak%2C%20Saya%20ingin%20order%20layanan%20laundry.%20Berikut%20detail%20pesanan%20saya%3A%0A%0ANama%3A%20%0AAlamat%20Penjemputan%3A%20%0AJenis%20Laundry%3A%20%0AWaktu%20Penjemputan%3A%20%0A%0AMohon%20info%20total%20biaya%20dan%20estimasi%20selesai%20ya.%20Terima%20kasih" target="_blank" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:-translate-y-0.5 flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i><span class="hidden sm:inline">Pesan Sekarang</span></a>
+<button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"><i data-lucide="menu" class="w-5 h-5"></i></button>
+</div>
+</div>
+<div id="mobileMenu" class="md:hidden hidden bg-white border-t border-gray-100 px-6 py-4 space-y-1">
+<a href="#" onclick="goPage('home');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Home</a>
+<a href="#" onclick="goPage('layanan');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Layanan</a>
+<a href="#" onclick="goPage('harga');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Harga</a>
+<a href="#" onclick="goPage('tentang');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Tentang Kami</a>
+<a href="#" onclick="goPage('artikel');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Artikel</a>
+<a href="#" onclick="goPage('kontak');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm font-medium text-slate-600 hover:bg-blue-50">Kontak</a>
+<a href="#" onclick="goPage('admin-login');closeMob();return false" class="block px-4 py-3 rounded-lg text-sm text-slate-400 hover:bg-gray-50">Admin</a>
+</div>
+</nav>
+
+<!-- PUBLIC PAGES -->
+<div id="publicWrap">
+
+<!-- HOME -->
+<div id="pg-home" class="pub-page active">
+<section class="hero-bg min-h-screen flex items-center pt-16 relative">
+<div class="bubble w-64 h-64 top-20 left-10"></div><div class="bubble w-96 h-96 bottom-10 right-10"></div>
+<div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center py-20">
+<div class="fade-up">
+<div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6"><span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span><span class="text-white/80 text-sm font-medium">Buka Hari Ini 08.00 - 21.00</span></div>
+<h1 class="font-poppins text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">Laundry <span class="text-cyan-300">Bersih,</span><br>Wangi, dan <span class="text-cyan-300">Cepat</span></h1>
+<p class="text-lg md:text-xl text-blue-100/80 mb-10 max-w-lg leading-relaxed">Solusi laundry terpercaya untuk kebutuhan harian Anda. Hasil bersih sempurna dengan aroma segar tahan lama.</p>
+<div class="flex flex-wrap gap-4">
+<a href="https://wa.me/6285261856087?text=Halo%20kak%2C%20Saya%20ingin%20order%20layanan%20laundry.%20Berikut%20detail%20pesanan%20saya%3A%0A%0ANama%3A%20%0AAlamat%20Penjemputan%3A%20%0AJenis%20Laundry%3A%20%0AWaktu%20Penjemputan%3A%20%0A%0AMohon%20info%20total%20biaya%20dan%20estimasi%20selesai%20ya.%20Terima%20kasih" target="_blank" class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-semibold hover:bg-cyan-50 transition-all hover:-translate-y-1 hover:shadow-xl flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>Pesan Sekarang</a>
+<button onclick="goPage('harga')" class="glass text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/20 transition-all hover:-translate-y-1 flex items-center gap-2"><i data-lucide="tag" class="w-5 h-5"></i>Lihat Harga</button>
+</div>
+<div class="flex items-center gap-8 mt-12">
+<div class="text-center"><span class="block text-3xl font-bold text-white">5K+</span><span class="text-blue-200/70 text-sm">Pelanggan</span></div>
+<div class="w-px h-10 bg-white/20"></div>
+<div class="text-center"><span class="block text-3xl font-bold text-white">8+</span><span class="text-blue-200/70 text-sm">Layanan</span></div>
+<div class="w-px h-10 bg-white/20"></div>
+<div class="text-center"><span class="block text-3xl font-bold text-white">4.9</span><span class="text-blue-200/70 text-sm">Rating</span></div>
+</div>
+</div>
+<div class="fade-up relative hidden lg:block">
+<div class="relative"><div class="absolute -inset-4 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-3xl blur-2xl"></div><img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&h=500&fit=crop" alt="Mesin Cuci Laundry" class="relative rounded-3xl shadow-2xl w-full float-anim"></div>
+<div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3"><div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"><i data-lucide="check-circle" class="w-6 h-6 text-green-600"></i></div><div><p class="font-semibold text-sm">Garansi Bersih</p><p class="text-xs text-slate-500">100% Puas atau Ulang</p></div></div>
+<div class="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3"><div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"><i data-lucide="clock" class="w-6 h-6 text-blue-600"></i></div><div><p class="font-semibold text-sm">Express 3 Jam</p><p class="text-xs text-slate-500">Cuci Kilat Siap</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="py-24 bg-white"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Keunggulan Kami</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Mengapa Pilih <span class="text-gradient">Berkah Laundry?</span></h2></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="card-hover bg-gradient-to-br from-blue-50 to-white border border-blue-100/50 rounded-2xl p-8 text-center fade-up"><div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i data-lucide="zap" class="w-8 h-8 text-blue-600"></i></div><h3 class="font-poppins font-semibold text-lg mb-2">Cepat & Tepat Waktu</h3><p class="text-slate-500 text-sm leading-relaxed">Proses cepat, selesai sesuai waktu yang dijanjikan tanpa kompromi kualitas</p></div>
+<div class="card-hover bg-gradient-to-br from-cyan-50 to-white border border-cyan-100/50 rounded-2xl p-8 text-center fade-up"><div class="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i data-lucide="wind" class="w-8 h-8 text-cyan-600"></i></div><h3 class="font-poppins font-semibold text-lg mb-2">Wangi Tahan Lama</h3><p class="text-slate-500 text-sm leading-relaxed">Menggunakan pewangi premium dengan aroma segar yang bertahan lama</p></div>
+<div class="card-hover bg-gradient-to-br from-emerald-50 to-white border border-emerald-100/50 rounded-2xl p-8 text-center fade-up"><div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i data-lucide="wallet" class="w-8 h-8 text-emerald-600"></i></div><h3 class="font-poppins font-semibold text-lg mb-2">Harga Terjangkau</h3><p class="text-slate-500 text-sm leading-relaxed">Harga kompetitif dengan kualitas premium, cocok untuk semua kalangan</p></div>
+<div class="card-hover bg-gradient-to-br from-violet-50 to-white border border-violet-100/50 rounded-2xl p-8 text-center fade-up"><div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i data-lucide="heart" class="w-8 h-8 text-violet-600"></i></div><h3 class="font-poppins font-semibold text-lg mb-2">Pelayanan Ramah</h3><p class="text-slate-500 text-sm leading-relaxed">Tim kami siap melayani dengan senyum dan penuh perhatian kepada Anda</p></div>
+</div>
+</div></section>
+
+<section class="py-24 bg-slate-50"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Testimoni</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Kata Mereka Tentang Kami</h2></div>
+<div class="grid md:grid-cols-3 gap-6" id="homeTesti"></div>
+</div></section>
+</div>
+
+<!-- LAYANAN -->
+<div id="pg-layanan" class="pub-page">
+<section class="pt-28 pb-24 bg-gradient-to-b from-blue-50 to-white"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Layanan Kami</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Layanan <span class="text-gradient">Profesional</span></h2><p class="text-slate-500 text-lg max-w-2xl mx-auto">Berbagai pilihan layanan laundry untuk memenuhi kebutuhan Anda</p></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="layananGrid"></div>
+</div></section>
+</div>
+
+<!-- HARGA -->
+<div id="pg-harga" class="pub-page">
+<section class="pt-28 pb-24 bg-gradient-to-b from-blue-50 to-white"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Daftar Harga</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Harga <span class="text-gradient">Terjangkau</span></h2><p class="text-slate-500 text-lg max-w-2xl mx-auto">Transparan tanpa biaya tersembunyi</p></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="hargaGrid"></div>
+</div></section>
+</div>
+
+<!-- TENTANG KAMI -->
+<div id="pg-tentang" class="pub-page">
+<section class="pt-28 pb-24"><div class="max-w-7xl mx-auto px-6">
+<div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+<div class="fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Tentang Kami</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-6">Cerita <span class="text-gradient">Berkah Laundry</span></h2><p class="text-slate-600 text-lg leading-relaxed mb-6">Berkah Laundry hadir sejak 2020 di Jl. Durung No.171, Sidorejo Hilir, Kec. Medan Tembung. Berawal dari keprihatinan terhadap kesibukan masyarakat modern yang seringkali tidak memiliki waktu untuk mencuci pakaian sendiri, kami membangun layanan laundry yang mengutamakan kualitas, kecepatan, dan kepuasan pelanggan.</p><p class="text-slate-600 text-lg leading-relaxed">Dengan peralatan modern dan deterjen berkualitas tinggi, kami memastikan setiap pakaian yang masuk ke Berkah Laundry mendapatkan perlakukan terbaik. Karena bagi kami, pakaian bersih bukan sekadar kebutuhan—tapi investasi untuk penampilan dan kepercayaan diri Anda.</p></div>
+<div class="fade-up relative"><div class="absolute -inset-4 bg-gradient-to-r from-blue-400/10 to-cyan-400/10 rounded-3xl blur-2xl"></div><img src="https://picsum.photos/seed/about-laundry2/600/450.jpg" alt="Tentang Kami" class="relative rounded-3xl shadow-xl w-full"></div>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-10 text-white fade-up relative overflow-hidden"><div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div><h3 class="font-poppins text-2xl font-bold mb-4 flex items-center gap-3"><i data-lucide="eye" class="w-7 h-7"></i>Visi</h3><p class="text-blue-100 leading-relaxed text-lg">Menjadi layanan laundry terpercaya dan terdepan di Medan yang mengutamakan kebersihan, kecepatan, dan kepuasan pelanggan dalam setiap pelayanan.</p></div>
+<div class="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-2xl p-10 text-white fade-up relative overflow-hidden"><div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div><h3 class="font-poppins text-2xl font-bold mb-4 flex items-center gap-3"><i data-lucide="target" class="w-7 h-7"></i>Misi</h3><ul class="text-cyan-100 space-y-3 text-lg"><li class="flex items-start gap-2"><i data-lucide="check" class="w-5 h-5 mt-1 flex-shrink-0"></i>Menyediakan layanan laundry berkualitas tinggi</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-5 h-5 mt-1 flex-shrink-0"></i>Memberikan harga terjangkau untuk semua</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-5 h-5 mt-1 flex-shrink-0"></i>Memastikan kepuasan pelanggan utama</li><li class="flex items-start gap-2"><i data-lucide="check" class="w-5 h-5 mt-1 flex-shrink-0"></i>Inovasi layanan yang terus berkembang</li></ul></div>
+</div>
+</div></section>
+</div>
+
+<!-- ARTIKEL -->
+<div id="pg-artikel" class="pub-page">
+<section class="pt-28 pb-24 bg-gradient-to-b from-blue-50 to-white"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Blog & Artikel</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Artikel <span class="text-gradient">Terkini</span></h2><p class="text-slate-500 text-lg max-w-2xl mx-auto">Tips dan informasi seputar perawatan pakaian</p></div>
+<div class="grid md:grid-cols-2 gap-8" id="artikelGrid"></div>
+</div></section>
+</div>
+
+<!-- ARTIKEL DETAIL -->
+<div id="pg-artikel-detail" class="pub-page">
+<section class="pt-28 pb-24"><div class="max-w-4xl mx-auto px-6" id="artikelDetail"></div></section>
+</div>
+
+<!-- TESTIMONI -->
+<div id="pg-testimoni" class="pub-page">
+<section class="pt-28 pb-24 bg-gradient-to-b from-blue-50 to-white"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Testimoni</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Apa Kata <span class="text-gradient">Pelanggan Kami</span></h2></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="testimoniGrid"></div>
+</div></section>
+</div>
+
+<!-- KONTAK -->
+<div id="pg-kontak" class="pub-page">
+<section class="pt-28 pb-24"><div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 fade-up"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">Hubungi Kami</span><h2 class="font-poppins text-3xl md:text-5xl font-bold text-slate-900 mb-4">Kami Siap <span class="text-gradient">Membantu</span></h2></div>
+<div class="grid lg:grid-cols-2 gap-12">
+<div class="fade-up"><div class="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
+<h3 class="font-poppins font-semibold text-xl mb-6">Kirim Pesan</h3>
+<form onsubmit="submitContact(event)"><div class="space-y-4">
+<div class="grid md:grid-cols-2 gap-4"><input type="text" placeholder="Nama Lengkap" required class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm"><input type="tel" placeholder="No. WhatsApp" required class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm"></div>
+<input type="email" placeholder="Email" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm">
+<textarea rows="4" placeholder="Pesan Anda..." required class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm resize-none"></textarea>
+<button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"><i data-lucide="send" class="w-4 h-4"></i>Kirim Pesan</button>
+</div></form></div></div>
+<div class="fade-up space-y-6">
+<div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm flex items-start gap-4"><div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="map-pin" class="w-6 h-6 text-blue-600"></i></div><div><h4 class="font-semibold mb-1">Alamat</h4><p class="text-slate-500 text-sm">Jl. Durung No.171, Sidorejo Hilir, Kec. Medan Tembung</p></div></div>
+<div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm flex items-start gap-4"><div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-6 h-6 text-green-600"></i></div><div><h4 class="font-semibold mb-1">WhatsApp</h4><p class="text-slate-500 text-sm">085261856087</p></div></div>
+<div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm flex items-start gap-4"><div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="clock" class="w-6 h-6 text-violet-600"></i></div><div><h4 class="font-semibold mb-1">Jam Operasional</h4><p class="text-slate-500 text-sm">Setiap Hari: 08.00 - 21.00</p></div></div>
+<div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d98.7!3d3.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzYnMDAuMCJOIDk4wrA0MicwMC4wIkU!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="250" style="border:0" allowfullscreen="" loading="lazy"></iframe></div>
+</div></div>
+</div></section>
+</div>
+
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminWrap" style="display:none">
+<div id="adminLoginScreen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+<div class="bubble w-96 h-96 -top-20 -left-20" style="background:rgba(59,130,246,.05)"></div>
+<div class="w-full max-w-md px-6">
+<div class="text-center mb-8"><img src="https://z-cdn-media.chatglm.cn/files/0daa9e86-dc41-45ff-a011-70b56da370f8.jpeg?auth_key=1879776924-c25b22cfca114eae837fe39595e97173-0-a912677efecefdb9cd2706888b62a95c" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto mb-4 shadow-lg shadow-blue-500/25 object-cover"><h1 class="font-poppins text-2xl font-bold text-white">Admin Panel</h1><p class="text-slate-400 text-sm mt-1">Masuk ke dashboard Berkah Laundry</p></div>
+<form onsubmit="doLogin(event)" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 space-y-4">
+<div><label class="text-slate-300 text-sm font-medium block mb-2">Email</label><input type="email" id="loginEmail" placeholder="Masukkan email" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500" required></div>
+<div><label class="text-slate-300 text-sm font-medium block mb-2">Password</label><input type="password" id="loginPass" placeholder="Masukkan password" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500" required></div>
+<button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"><i data-lucide="log-in" class="w-4 h-4"></i>Masuk</button>
+</form>
+<button onclick="goPage('home')" class="mt-6 text-slate-400 hover:text-white text-sm transition-colors w-full flex items-center justify-center gap-2 bg-transparent border-none cursor-pointer py-2"><i data-lucide="arrow-left" class="w-4 h-4"></i>Kembali ke Website</button>
+</div>
+</div>
+<div id="adminDashScreen" style="display:none">
+<div class="flex min-h-screen">
+<aside id="adminSidebar" class="admin-sidebar w-64 fixed left-0 top-0 bottom-0 z-40 flex flex-col transition-transform duration-300 lg:translate-x-0 -translate-x-full">
+<div class="p-6 border-b border-white/5"><div class="flex items-center gap-3"><img src="https://z-cdn-media.chatglm.cn/files/0daa9e86-dc41-45ff-a011-70b56da370f8.jpeg?auth_key=1879776924-c25b22cfca114eae837fe39595e97173-0-a912677efecefdb9cd2706888b62a95c" alt="Logo" class="w-10 h-10 rounded-xl object-cover"><div><p class="text-white font-semibold text-sm">Berkah Laundry</p><p class="text-slate-400 text-xs">Admin Panel</p></div></div></div>
+<nav class="flex-1 p-4 space-y-1">
+<button onclick="goAdmin('dashboard')" data-ap="dashboard" class="admin-nav-btn"><i data-lucide="layout-dashboard" class="w-5 h-5"></i>Dashboard</button>
+<button onclick="goAdmin('layanan')" data-ap="layanan" class="admin-nav-btn"><i data-lucide="spray-can" class="w-5 h-5"></i>Layanan</button>
+<button onclick="goAdmin('harga')" data-ap="harga" class="admin-nav-btn"><i data-lucide="tag" class="w-5 h-5"></i>Harga</button>
+<button onclick="goAdmin('pesanan')" data-ap="pesanan" class="admin-nav-btn"><i data-lucide="shopping-bag" class="w-5 h-5"></i>Pesanan</button>
+<button onclick="goAdmin('pelanggan')" data-ap="pelanggan" class="admin-nav-btn"><i data-lucide="users" class="w-5 h-5"></i>Pelanggan</button>
+<button onclick="goAdmin('artikel')" data-ap="artikel" class="admin-nav-btn"><i data-lucide="newspaper" class="w-5 h-5"></i>Artikel</button>
+<button onclick="goAdmin('pengaturan')" data-ap="pengaturan" class="admin-nav-btn"><i data-lucide="settings" class="w-5 h-5"></i>Pengaturan</button>
+</nav>
+<div class="p-4 border-t border-white/5"><div class="flex items-center gap-3 px-4 py-3"><div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold" id="adminAvatar">A</div><div class="flex-1 min-w-0"><p class="text-white text-sm font-medium truncate" id="adminNameDisp">Admin</p><p class="text-slate-400 text-xs truncate" id="adminRoleDisp">Administrator</p></div></div><button onclick="doLogout()" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-all mt-2 border-none bg-transparent cursor-pointer"><i data-lucide="log-out" class="w-4 h-4"></i>Keluar</button></div>
+</aside>
+<div class="flex-1 lg:ml-64">
+<header class="bg-white border-b border-gray-100 px-6 h-16 flex items-center justify-between sticky top-0 z-30"><button onclick="document.getElementById('adminSidebar').classList.toggle('-translate-x-full')" class="lg:hidden p-2 rounded-lg hover:bg-gray-100"><i data-lucide="menu" class="w-5 h-5"></i></button><h2 class="font-semibold text-lg" id="adminPageTitle">Dashboard</h2><div class="flex items-center gap-3"><span class="text-xs text-slate-400" id="adminDateDisp"></span><div class="w-2 h-2 bg-green-500 rounded-full pulse-dot"></div></div></header>
+<div class="p-6" id="adminContent"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer id="mainFooter" class="bg-slate-900 text-white">
+<div class="max-w-7xl mx-auto px-6 py-16">
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+<div><div class="flex items-center gap-3 mb-5"><img src="https://z-cdn-media.chatglm.cn/files/0daa9e86-dc41-45ff-a011-70b56da370f8.jpeg?auth_key=1879776924-c25b22cfca114eae837fe39595e97173-0-a912677efecefdb9cd2706888b62a95c" alt="Logo" class="h-10 w-10 rounded-xl object-cover"><span class="font-poppins font-bold text-xl">Berkah<span class="text-blue-400">Laundry</span></span></div><p class="text-slate-400 text-sm leading-relaxed mb-4">Solusi laundry terpercaya untuk kebutuhan harian Anda.</p><div class="flex items-center gap-2 text-slate-400 text-sm"><i data-lucide="clock" class="w-4 h-4 text-blue-400"></i>08.00 - 21.00</div></div>
+<div><h4 class="font-semibold text-base mb-4">Link Cepat</h4><ul class="space-y-2"><li><a href="#" onclick="goPage('home');return false" class="text-slate-400 text-sm hover:text-blue-400">Home</a></li><li><a href="#" onclick="goPage('layanan');return false" class="text-slate-400 text-sm hover:text-blue-400">Layanan</a></li><li><a href="#" onclick="goPage('harga');return false" class="text-slate-400 text-sm hover:text-blue-400">Harga</a></li><li><a href="#" onclick="goPage('tentang');return false" class="text-slate-400 text-sm hover:text-blue-400">Tentang Kami</a></li><li><a href="#" onclick="goPage('kontak');return false" class="text-slate-400 text-sm hover:text-blue-400">Kontak</a></li></ul></div>
+<div><h4 class="font-semibold text-base mb-4">Layanan</h4><ul class="space-y-2 text-slate-400 text-sm"><li>Cuci Setrika Wangi</li><li>Cuci Lipat Rapi</li><li>Setrika Wangi</li><li>Cuci Sepatu</li><li>Cuci Kilat</li></ul></div>
+<div><h4 class="font-semibold text-base mb-4">Hubungi Kami</h4><div class="space-y-3"><div class="flex items-start gap-3 text-slate-400 text-sm"><i data-lucide="map-pin" class="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0"></i>Jl. Durung No.171, Sidorejo Hilir</div><div class="flex items-center gap-3 text-slate-400 text-sm"><i data-lucide="phone" class="w-4 h-4 text-blue-400"></i>085261856087</div></div></div>
+</div>
+</div>
+<div class="border-t border-white/10 py-8 text-center"><p class="text-slate-500 text-sm">&copy; 2025 Berkah Laundry. All rights reserved.</p></div>
+</footer>
+
+<div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+<div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto" id="modalBody"></div>
+</div>
+
+<script>
+const WA_LINK="https://wa.me/6285261856087?text=Halo%20kak%2C%20Saya%20ingin%20order%20layanan%20laundry.%20Berikut%20detail%20pesanan%20saya%3A%0A%0ANama%3A%20%0AAlamat%20Penjemputan%3A%20%0AJenis%20Laundry%3A%20%0AWaktu%20Penjemputan%3A%20%0A%0AMohon%20info%20total%20biaya%20dan%20estimasi%20selesai%20ya.%20Terima%20kasih";
+const LOGO_URL="https://z-cdn-media.chatglm.cn/files/0daa9e86-dc41-45ff-a011-70b56da370f8.jpeg?auth_key=1879776924-c25b22cfca114eae837fe39595e97173-0-a912677efecefdb9cd2706888b62a95c";
+
+const DEF={
+services:[
+{id:1,name:'Cuci dan Kering',desc:'Proses pencucian dan pengeringan pakaian menggunakan mesin cuci modern dan deterjen berkualitas tinggi. Pakaian Anda akan bersih segar dan kering sempurna.',icon:'waves'},
+{id:2,name:'Cuci Kering dan Setrika',desc:'Layanan lengkap dari pencucian, pengeringan, hingga setrika rapi. Pakaian siap pakai langsung dengan aroma segar yang tahan lama.',icon:'shirt'},
+{id:3,name:'Cuci Sepatu',desc:'Pencucian sepatu dengan perawatan khusus, menghilangkan noda dan bau tanpa merusak material. Cocok untuk segala jenis sepatu.',icon:'footprints'},
+{id:4,name:'Cuci Saja',desc:'Hanya layanan pencucian tanpa setrika. Cocok untuk Anda yang ingin mencuci pakaian tanpa repot menyetrika sendiri di rumah.',icon:'droplets'},
+{id:5,name:'Setrika Saja',desc:'Layanan setrika profesional untuk pakaian yang sudah bersih. Hasil rapi, tajam, dan wangi dengan teknik setrika berkualitas.',icon:'wind'},
+{id:6,name:'Ambil Sendiri & Diantar',desc:'Layanan antar-jemput pakaian ke lokasi Anda. Praktis tanpa perlu keluar rumah, cukup hubungi kami via WhatsApp.',icon:'truck'}
+],
+pricing:[
+{id:1,name:'Cuci Setrika Wangi',price:8000,unit:'Kg',cat:'Reguler'},
+{id:2,name:'Cuci Lipat Rapi',price:5000,unit:'Kg',cat:'Reguler'},
+{id:3,name:'Setrika Wangi',price:6000,unit:'Kg',cat:'Reguler'},
+{id:4,name:'Cuci Saja',price:11000,unit:'7Kg',cat:'Mesin'},
+{id:5,name:'Kering Saja',price:11000,unit:'7Kg',cat:'Mesin'},
+{id:6,name:'Cuci Selimut Besar',price:30000,unit:'Pcs',cat:'Item'},
+{id:7,name:'Cuci Selimut Kecil',price:15000,unit:'Pcs',cat:'Item'},
+{id:8,name:'Cuci Sepatu',price:50000,unit:'Pcs',cat:'Item'},
+{id:9,name:'Cuci Kilat',price:15000,unit:'Kg',cat:'Express'}
+],
+articles:[
+{id:1,title:'Tips Merawat Pakaian Agar Awet',cat:'Tips',date:'15 Jan 2025',desc:'Pelajari cara merawat pakaian kesayangan Anda agar tetap awet dan terlihat seperti baru.',content:'<p class="mb-4 text-lg leading-relaxed">Merawat pakaian dengan benar adalah investasi jangka panjang. Pakaian yang dirawat dengan baik tidak hanya lebih awet, tetapi juga tetap terlihat bagus meskipun sudah sering dipakai.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">1. Pisahkan Pakaian Saat Mencuci</h3><p class="mb-4 text-lg leading-relaxed">Pisahkan pakaian berdasarkan warna: terang, gelap, dan putih. Ini mencegah luntur dan menjaga warna tetap cerah. Juga pisahkan berdasarkan material—jangan campur pakaian halus dengan yang kasar.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">2. Gunakan Air Dingin</h3><p class="mb-4 text-lg leading-relaxed">Air dingin lebih ramah terhadap serat kain dan membantu menjaga warna. Kecuali untuk pakaian yang sangat kotor atau handuk, air hangat bisa digunakan.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">3. Jangan Terlalu Banyak Deterjen</h3><p class="mb-4 text-lg leading-relaxed">Penggunaan deterjen berlebih justru meninggalkan residu pada pakaian dan membuat kain kasar. Gunakan sesuai takaran yang dianjurkan.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">4. Keringkan dengan Benar</h3><p class="mb-4 text-lg leading-relaxed">Jemur pakaian di tempat teduh untuk menghindari warna pudar akibat sinar matahari langsung. Untuk pakaian berbahan halus, keringkan secara datar.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">5. Simpan dengan Rapi</h3><p class="mb-4 text-lg leading-relaxed">Lipat pakaian dengan benar atau gantung menggunakan hanger yang sesuai. Gunakan kamper atau silica gel untuk mencegah kelembaban dan ngengat.</p>'},
+{id:2,title:'Cara Menghilangkan Noda Membandel',cat:'Tutorial',date:'12 Jan 2025',desc:'Noda bandel tak perlu membuat Anda panik. Simak cara efektif menghilangkan berbagai jenis noda.',content:'<p class="mb-4 text-lg leading-relaxed">Noda pada pakaian adalah masalah umum yang sering membuat frustasi. Namun dengan teknik yang tepat, hampir semua noda bisa dihilangkan.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Noda Minyak</h3><p class="mb-4 text-lg leading-relaxed">Taburkan tepung maizena atau bubuk talk pada noda dan biarkan 15 menit. Tepung akan menyerap minyak. Kemudian cuci dengan air hangat dan deterjen.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Noda Tinta</h3><p class="mb-4 text-lg leading-relaxed">Oleskan alkohol atau hand sanitizer pada noda, lalu tepuk dengan kain bersih. Jangan digosok karena akan memperlebar noda.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Noda Darah</h3><p class="mb-4 text-lg leading-relaxed">Rendam pakaian dalam air dingin selama 30 menit. Gunakan sabun cuci piring untuk menghilangkan sisa noda. Hindari air panas karena akan mengikat protein darah pada kain.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Noda Kopi/Teh</h3><p class="mb-4 text-lg leading-relaxed">Segera bilas dengan air dingin. Oleskan campuran cuka putih dan baking soda, lalu bilas kembali. Ulangi jika perlu.</p>'},
+{id:3,title:'Kenapa Laundry Profesional Lebih Efektif',cat:'Informasi',date:'8 Jan 2025',desc:'Bandingkan mencuci sendiri dengan menggunakan jasa laundry profesional—mana yang lebih menguntungkan?',content:'<p class="mb-4 text-lg leading-relaxed">Banyak orang masih ragu menggunakan jasa laundry profesional, menganggap mencuci sendiri lebih hemat. Namun faktanya, laundry profesional memiliki banyak keunggulan yang sering terlewatkan.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">1. Peralatan Profesional</h3><p class="mb-4 text-lg leading-relaxed">Laundry profesional menggunakan mesin cuci industri dengan kapasitas dan teknologi yang jauh lebih baik dari mesin rumahan. Hasilnya, pakaian lebih bersih dan lebih terjaga kualitasnya.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">2. Deterjen Khusus</h3><p class="mb-4 text-lg leading-relaxed">Laundry menggunakan deterjen komersial berkualitas tinggi yang tidak mudah didapat di pasaran. Formula khusus ini lebih efektif menghilangkan noda tanpa merusak kain.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">3. Hemat Waktu</h3><p class="mb-4 text-lg leading-relaxed">Waktu yang Anda habiskan untuk mencuci, menjemur, dan menyetrika bisa mencapai 5-7 jam per minggu. Dengan laundry profesional, waktu itu bisa digunakan untuk hal yang lebih produktif.</p>'},
+{id:4,title:'Panduan Memilih Deterjen yang Tepat',cat:'Tips',date:'3 Jan 2025',desc:'Tidak semua deterjen sama. Kenali jenis-jenis deterjen dan cara memilih yang sesuai kebutuhan.',content:'<p class="mb-4 text-lg leading-relaxed">Memilih deterjen yang tepat sangat penting untuk menjaga kualitas pakaian dan efektivitas pencucian.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Deterjen Bubuk</h3><p class="mb-4 text-lg leading-relaxed">Cocok untuk mencuci pakaian yang sangat kotor dan noda berat. Lebih efektif pada noda tanah dan lumpur. Namun kurang baik untuk pencucian air dingin karena sulit larut.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Deterjen Cair</h3><p class="mb-4 text-lg leading-relaxed">Lebih mudah larut, cocok untuk pencucian air dingin dan mesin cuci front-loading. Baik untuk noda minyak dan lemak. Lebih ramah terhadap pakaian berwarna.</p><h3 class="text-xl font-semibold mb-3 mt-8 text-blue-700">Tips Memilih</h3><p class="mb-4 text-lg leading-relaxed">Pertimbangkan jenis mesin cuci, suhu air yang digunakan, jenis pakaian yang sering dicuci, dan sensitivitas kulit anggota keluarga.</p>'}
+],
+testimonials:[
+{id:1,name:'Siti Rahma',role:'Ibu Rumah Tangga',text:'Sudah 2 tahun langganan di Berkah Laundry. Pakaian selalu bersih, wangi, dan rapi. Pelayanannya juga ramah!',rating:5},
+{id:2,name:'Budi Santoso',role:'Karyawan Swasta',text:'Sebagai pekerja yang sibuk, Berkah Laundry sangat membantu. Tinggal antar, nanti dijemput sudah bersih dan wangi!',rating:5},
+{id:3,name:'Anisa Putri',role:'Mahasiswa',text:'Harganya terjangkau untuk mahasiswa seperti saya. Cuci kilatnya juga cepat banget, cuma 3 jam sudah jadi!',rating:5},
+{id:4,name:'Rizki Pratama',role:'Wiraswasta',text:'Selimut dan sepatu yang dicuci di sini hasilnya memuaskan. Noda membandel bisa hilang semua!',rating:4},
+{id:5,name:'Dewi Lestari',role:'Guru',text:'Layanan antar-jemputnya sangat memudahkan. Tinggal WhatsApp, pakaian sudah dijemput dan dikembalikan rapi.',rating:5}
+],
+orders:[
+{id:'ORD-001',customer:'Siti Rahma',phone:'081234567890',service:'Cuci Setrika Wangi',qty:5,unit:'Kg',total:40000,status:'Selesai',note:'Pakaian bayi, pewangi lembut',date:'2025-01-15'},
+{id:'ORD-002',customer:'Budi Santoso',phone:'081234567891',service:'Cuci Kilat',qty:3,unit:'Kg',total:45000,status:'Dicuci',note:'Besok pagi diambil',date:'2025-01-16'},
+{id:'ORD-003',customer:'Anisa Putri',phone:'081234567892',service:'Cuci Sepatu',qty:2,unit:'Pcs',total:100000,status:'Diproses',note:'Sepatu putih hati-hati',date:'2025-01-16'},
+{id:'ORD-004',customer:'Rizki Pratama',phone:'081234567893',service:'Cuci Selimut Besar',qty:1,unit:'Pcs',total:30000,status:'Diambil',note:'Selimut tebal',date:'2025-01-14'},
+{id:'ORD-005',customer:'Dewi Lestari',phone:'081234567894',service:'Setrika Wangi',qty:4,unit:'Kg',total:24000,status:'Selesai',note:'Baju kerja setrika rapi',date:'2025-01-16'}
+],
+customers:[
+{id:1,name:'Siti Rahma',phone:'081234567890',email:'siti@email.com',totalOrders:24,totalSpent:960000,joinDate:'2024-03-15'},
+{id:2,name:'Budi Santoso',phone:'081234567891',email:'budi@email.com',totalOrders:18,totalSpent:720000,joinDate:'2024-05-20'},
+{id:3,name:'Anisa Putri',phone:'081234567892',email:'anisa@email.com',totalOrders:12,totalSpent:480000,joinDate:'2024-08-10'},
+{id:4,name:'Rizki Pratama',phone:'081234567893',email:'rizki@email.com',totalOrders:8,totalSpent:520000,joinDate:'2024-10-05'},
+{id:5,name:'Dewi Lestari',phone:'081234567894',email:'dewi@email.com',totalOrders:15,totalSpent:600000,joinDate:'2024-06-18'}
+],
+settings:{name:'Berkah Laundry',address:'Jl. Durung No.171, Sidorejo Hilir, Kec. Medan Tembung',phone:'085261856087',hours:'08.00 - 21.00'}
+};
+
+function LD(k){try{const d=localStorage.getItem('blk_'+k);return d?JSON.parse(d):JSON.parse(JSON.stringify(DEF[k]))}catch(e){return JSON.parse(JSON.stringify(DEF[k]))}}
+function SD(k,v){localStorage.setItem('blk_'+k,JSON.stringify(v))}
+let S=LD('services'),P=LD('pricing'),A=LD('articles'),T=LD('testimonials'),O=LD('orders'),C=LD('customers'),SET=LD('settings');
+let curAdmin='dashboard',adminUser=null;
+function closeMob(){document.getElementById('mobileMenu').classList.add('hidden')}
+
+function goPage(name){
+if(name==='admin-login'){goAdminLogin();return}
+document.querySelectorAll('.pub-page').forEach(p=>p.classList.remove('active'));
+const el=document.getElementById('pg-'+name);if(el)el.classList.add('active');
+document.getElementById('publicWrap').style.display='block';document.getElementById('adminWrap').style.display='none';
+document.getElementById('mainNav').style.display='block';document.getElementById('mainFooter').style.display='block';document.getElementById('waFloat').style.display='flex';
+window.scrollTo({top:0,behavior:'smooth'});renderPublic(name);setTimeout(()=>{initAnims();lucide.createIcons()},50);
+}
+function goAdminLogin(){
+document.getElementById('publicWrap').style.display='none';document.getElementById('adminWrap').style.display='block';
+document.getElementById('adminLoginScreen').style.display='flex';document.getElementById('adminDashScreen').style.display='none';
+document.getElementById('mainNav').style.display='none';document.getElementById('mainFooter').style.display='none';document.getElementById('waFloat').style.display='none';
+document.getElementById('loginEmail').value='';document.getElementById('loginPass').value='';
+window.scrollTo({top:0});setTimeout(()=>lucide.createIcons(),50);
+}
+function goAdmin(page){
+curAdmin=page;document.getElementById('adminLoginScreen').style.display='none';document.getElementById('adminDashScreen').style.display='block';
+document.querySelectorAll('.admin-nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.ap===page));
+const titles={dashboard:'Dashboard',layanan:'Manajemen Layanan',harga:'Manajemen Harga',pesanan:'Manajemen Pesanan',pelanggan:'Manajemen Pelanggan',artikel:'Manajemen Artikel',pengaturan:'Pengaturan Website'};
+document.getElementById('adminPageTitle').textContent=titles[page]||'Dashboard';renderAdmin(page);
+if(window.innerWidth<1024)document.getElementById('adminSidebar').classList.add('-translate-x-full');
+}
+function renderPublic(n){switch(n){case'home':renderHome();break;case'layanan':renderLayanan();break;case'harga':renderHarga();break;case'artikel':renderArtikel();break;case'testimoni':renderTestimoni();break}}
+function starH(r){let h='';for(let i=0;i<5;i++)h+=i<r?'<svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>':'<svg class="w-4 h-4 text-gray-200" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';return h}
+
+function renderHome(){document.getElementById('homeTesti').innerHTML=T.slice(0,3).map(t=>`<div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 fade-up"><div class="flex items-center gap-1 mb-3">${starH(t.rating)}</div><p class="text-slate-600 text-sm leading-relaxed mb-4">"${t.text}"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">${t.name.charAt(0)}</div><div><p class="font-semibold text-sm">${t.name}</p><p class="text-slate-400 text-xs">${t.role}</p></div></div></div>`).join('')}
+
+const svcIcons=['waves','shirt','footprints','droplets','wind','truck'];
+const svcBgs=['from-blue-50 to-white border-blue-100/50','from-cyan-50 to-white border-cyan-100/50','from-violet-50 to-white border-violet-100/50','from-emerald-50 to-white border-emerald-100/50','from-amber-50 to-white border-amber-100/50','from-rose-50 to-white border-rose-100/50'];
+const svcIconBgs=['bg-blue-100','bg-cyan-100','bg-violet-100','bg-emerald-100','bg-amber-100','bg-rose-100'];
+const svcIconClr=['text-blue-600','text-cyan-600','text-violet-600','text-emerald-600','text-amber-600','text-rose-600'];
+const svcBtnClr=['text-blue-600','text-cyan-600','text-violet-600','text-emerald-600','text-amber-600','text-rose-600'];
+
+function renderLayanan(){document.getElementById('layananGrid').innerHTML=S.map((s,i)=>{const idx=i%6;return`<div class="card-hover bg-gradient-to-br ${svcBgs[idx]} border rounded-2xl p-8 fade-up"><div class="w-16 h-16 ${svcIconBgs[idx]} rounded-2xl flex items-center justify-center mb-5"><i data-lucide="${svcIcons[idx]}" class="w-8 h-8 ${svcIconClr[idx]}"></i></div><h3 class="font-poppins font-semibold text-lg mb-3">${s.name}</h3><p class="text-slate-500 text-sm leading-relaxed mb-4">${s.desc}</p><button onclick="goPage('harga')" class="${svcBtnClr[idx]} text-sm font-semibold hover:underline flex items-center gap-1">Lihat Harga <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button></div>`}).join('')}
+
+const catStyles={Reguler:{bg:'bg-blue-50',text:'text-blue-600',accent:'text-blue-600'},Mesin:{bg:'bg-cyan-50',text:'text-cyan-600',accent:'text-cyan-600'},Item:{bg:'bg-violet-50',text:'text-violet-600',accent:'text-violet-600'},Express:{bg:'bg-amber-50',text:'text-amber-600',accent:'text-amber-600'}};
+function renderHarga(){document.getElementById('hargaGrid').innerHTML=P.map(p=>{const cs=catStyles[p.cat]||catStyles.Reguler;return`<div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 fade-up"><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 ${cs.bg} ${cs.text} text-xs font-semibold rounded-full">${p.cat}</span><i data-lucide="tag" class="w-5 h-5 text-slate-300"></i></div><h3 class="font-poppins font-semibold text-lg mb-2">${p.name}</h3><div class="flex items-baseline gap-1"><span class="text-3xl font-bold ${cs.accent}">Rp${p.price.toLocaleString('id-ID')}</span><span class="text-slate-400 text-sm">/${p.unit}</span></div>${p.discount?`<div class="mt-2 inline-block px-2 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded">Diskon ${p.discount}%</div>`:''}</div>`}).join('')}
+
+function renderArtikel(){document.getElementById('artikelGrid').innerHTML=A.map(a=>`<div class="card-hover bg-white rounded-2xl border border-gray-100 cursor-pointer fade-up" onclick="openArticle(${a.id})"><div class="p-8"><div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-semibold rounded-full">${a.cat}</span><span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>${a.date}</span></div><h3 class="font-poppins font-semibold text-xl mb-3">${a.title}</h3><p class="text-slate-500 text-sm leading-relaxed line-clamp-3">${a.desc}</p><span class="inline-flex items-center gap-1 text-blue-600 text-sm font-semibold mt-4 hover:underline">Baca Selengkapnya <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span></div></div>`).join('')}
+function openArticle(id){const a=A.find(x=>x.id===id);if(!a)return;goPage('artikel-detail');document.getElementById('artikelDetail').innerHTML=`<button onclick="goPage('artikel')" class="flex items-center gap-2 text-blue-600 font-medium mb-8 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i>Kembali ke Artikel</button><article class="fade-up"><div class="flex items-center gap-4 mb-6"><span class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-semibold rounded-full">${a.cat}</span><span class="text-slate-400 text-sm flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>${a.date}</span></div><h1 class="font-poppins text-3xl md:text-4xl font-bold text-slate-900 mb-8">${a.title}</h1><div class="text-slate-600 leading-relaxed">${a.content}</div></article>`;setTimeout(()=>{initAnims();lucide.createIcons()},50)}
+function renderTestimoni(){document.getElementById('testimoniGrid').innerHTML=T.map(t=>`<div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 fade-up"><div class="flex items-center gap-1 mb-3">${starH(t.rating)}</div><p class="text-slate-600 text-sm leading-relaxed mb-4">"${t.text}"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">${t.name.charAt(0)}</div><div><p class="font-semibold text-sm">${t.name}</p><p class="text-slate-400 text-xs">${t.role}</p></div></div></div>`).join('')}
+function submitContact(e){e.preventDefault();showToast('Pesan berhasil dikirim! Kami akan segera menghubungi Anda.','success');e.target.reset()}
+
+// ADMIN AUTH - hanya berkahlaundry27@gmail.com / Berkah99
+function doLogin(e){
+e.preventDefault();
+const em=document.getElementById('loginEmail').value.trim(),pw=document.getElementById('loginPass').value;
+if(em==='berkahlaundry27@gmail.com'&&pw==='Berkah99'){adminUser={name:'Admin',role:'Administrator'};enterAdmin();showToast('Selamat datang, Admin!','success')}
+else showToast('Email atau password salah!','error');
+}
+function enterAdmin(){
+document.getElementById('adminAvatar').textContent='A';document.getElementById('adminNameDisp').textContent='Admin';document.getElementById('adminRoleDisp').textContent='Administrator';
+document.getElementById('adminDateDisp').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+goAdmin('dashboard');
+}
+function doLogout(){adminUser=null;goPage('home');showToast('Berhasil keluar','info')}
+
+function renderAdmin(page){const c=document.getElementById('adminContent');switch(page){case'dashboard':c.innerHTML=rDash();break;case'layanan':c.innerHTML=rALay();break;case'harga':c.innerHTML=rAHrg();break;case'pesanan':c.innerHTML=rAOrd();break;case'pelanggan':c.innerHTML=rACust();break;case'artikel':c.innerHTML=rAArt();break;case'pengaturan':c.innerHTML=rASet();break}setTimeout(()=>lucide.createIcons(),50)}
+function stC(s){return{'Diproses':'bg-yellow-100 text-yellow-700','Dicuci':'bg-blue-100 text-blue-700','Selesai':'bg-green-100 text-green-700','Diambil':'bg-slate-100 text-slate-600'}[s]||'bg-gray-100 text-gray-600'}
+
+function rDash(){const tO=156+Math.floor(Math.random()*50),rv=4500000+Math.floor(Math.random()*2000000),aC=89+Math.floor(Math.random()*30),pn=O.filter(o=>o.status!=='Diambil'&&o.status!=='Selesai').length;return`<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8"><div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#3b82f6)"><div class="flex items-center justify-between mb-3"><i data-lucide="shopping-bag" class="w-8 h-8 opacity-80"></i><span class="text-xs bg-white/20 px-2 py-1 rounded-full">+12%</span></div><p class="text-2xl font-bold">${tO}</p><p class="text-sm opacity-80">Total Pesanan</p></div><div class="stat-card" style="background:linear-gradient(135deg,#059669,#10b981)"><div class="flex items-center justify-between mb-3"><i data-lucide="wallet" class="w-8 h-8 opacity-80"></i><span class="text-xs bg-white/20 px-2 py-1 rounded-full">+8%</span></div><p class="text-2xl font-bold">Rp${(rv/1e6).toFixed(1)}jt</p><p class="text-sm opacity-80">Pendapatan</p></div><div class="stat-card" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)"><div class="flex items-center justify-between mb-3"><i data-lucide="users" class="w-8 h-8 opacity-80"></i><span class="text-xs bg-white/20 px-2 py-1 rounded-full">+5%</span></div><p class="text-2xl font-bold">${aC}</p><p class="text-sm opacity-80">Pelanggan Aktif</p></div><div class="stat-card" style="background:linear-gradient(135deg,#d97706,#f59e0b)"><div class="flex items-center justify-between mb-3"><i data-lucide="clock" class="w-8 h-8 opacity-80"></i><span class="text-xs bg-white/20 px-2 py-1 rounded-full">${pn} aktif</span></div><p class="text-2xl font-bold">${pn}</p><p class="text-sm opacity-80">Pending</p></div></div><div class="grid lg:grid-cols-2 gap-6"><div class="bg-white rounded-2xl border border-gray-100 p-6"><h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5 text-blue-500"></i>Pesanan Terbaru</h3><div class="space-y-3">${O.slice(0,5).map(o=>`<div class="flex items-center justify-between py-3 border-b border-gray-50 last:border-0"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-blue-500"></i></div><div><p class="font-medium text-sm">${o.customer}</p><p class="text-xs text-slate-400">${o.service}</p></div></div><span class="status-badge ${stC(o.status)}">${o.status}</span></div>`).join('')}</div></div><div class="bg-white rounded-2xl border border-gray-100 p-6"><h3 class="font-semibold text-lg mb-4 flex items-center gap-2"><i data-lucide="trending-up" class="w-5 h-5 text-green-500"></i>Pendapatan 7 Hari</h3><div class="space-y-3">${['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(d=>{const v=300000+Math.floor(Math.random()*500000);return`<div class="flex items-center gap-3"><span class="text-xs text-slate-500 w-16">${d}</span><div class="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden"><div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width:${Math.floor(v/800000*100)}%"></div></div><span class="text-xs font-medium w-20 text-right">Rp${(v/1000).toFixed(0)}K</span></div>`}).join('')}</div></div></div>`}
+
+function rALay(){return`<div class="flex justify-between items-center mb-6"><p class="text-slate-500 text-sm">${S.length} layanan</p><button onclick="openSvcM()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Tambah</button></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">${S.map(s=>`<div class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-all"><div class="flex justify-between items-start mb-3"><h4 class="font-semibold">${s.name}</h4><div class="flex gap-1"><button onclick="openSvcM(${s.id})" class="p-1.5 rounded-lg hover:bg-blue-50 text-slate-400 hover:text-blue-600"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="delSvc(${s.id})" class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div><p class="text-slate-500 text-sm">${s.desc}</p></div>`).join('')}</div>`}
+function openSvcM(id){const s=id?S.find(x=>x.id===id):null;document.getElementById('modalBody').innerHTML=`<div class="p-6"><h3 class="font-poppins font-semibold text-xl mb-6">${s?'Edit':'Tambah'} Layanan</h3><form onsubmit="saveSvc(event,${id||0})"><div class="space-y-4"><div><label class="text-sm font-medium block mb-1">Nama</label><input id="mN" value="${s?s.name:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Deskripsi</label><textarea id="mD" rows="3" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none">${s?s.desc:''}</textarea></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Batal</button><button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-blue-700">Simpan</button></div></form></div>`;openModal()}
+function saveSvc(e,id){e.preventDefault();const n=document.getElementById('mN').value,d=document.getElementById('mD').value;if(id){const s=S.find(x=>x.id===id);if(s){s.name=n;s.desc=d}}else S.push({id:Date.now(),name:n,desc:d,icon:'package'});SD('services',S);closeModal();renderAdmin('layanan');showToast('Layanan disimpan!','success')}
+function delSvc(id){if(!confirm('Hapus layanan?'))return;S=S.filter(x=>x.id!==id);SD('services',S);renderAdmin('layanan');showToast('Dihapus','info')}
+
+function rAHrg(){return`<div class="flex justify-between items-center mb-6"><p class="text-slate-500 text-sm">${P.length} daftar harga</p><button onclick="openPrM()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Tambah</button></div><div class="bg-white rounded-2xl border border-gray-100 overflow-x-auto"><table class="w-full min-w-[600px]"><thead class="bg-slate-50"><tr><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Layanan</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Kategori</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Harga</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Diskon</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Aksi</th></tr></thead><tbody class="divide-y divide-gray-50">${P.map(p=>`<tr class="hover:bg-slate-50/50"><td class="px-6 py-4 text-sm font-medium">${p.name}</td><td class="px-6 py-4"><span class="px-2.5 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">${p.cat}</span></td><td class="px-6 py-4 text-sm font-semibold">Rp${p.price.toLocaleString('id-ID')}/${p.unit}</td><td class="px-6 py-4 text-sm text-slate-400">${p.discount?p.discount+'%':'-'}</td><td class="px-6 py-4 text-center"><div class="flex justify-center gap-1"><button onclick="openPrM(${p.id})" class="p-1.5 rounded-lg hover:bg-blue-50 text-slate-400 hover:text-blue-600"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="delPr(${p.id})" class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td></tr>`).join('')}</tbody></table></div>`}
+function openPrM(id){const p=id?P.find(x=>x.id===id):null;document.getElementById('modalBody').innerHTML=`<div class="p-6"><h3 class="font-poppins font-semibold text-xl mb-6">${p?'Edit':'Tambah'} Harga</h3><form onsubmit="savePr(event,${id||0})"><div class="space-y-4"><div><label class="text-sm font-medium block mb-1">Nama</label><input id="pN" value="${p?p.name:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">Harga (Rp)</label><input type="number" id="pP" value="${p?p.price:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Satuan</label><input id="pU" value="${p?p.unit:'Kg'}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">Kategori</label><select id="pC" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"><option ${p&&p.cat==='Reguler'?'selected':''}>Reguler</option><option ${p&&p.cat==='Mesin'?'selected':''}>Mesin</option><option ${p&&p.cat==='Item'?'selected':''}>Item</option><option ${p&&p.cat==='Express'?'selected':''}>Express</option></select></div><div><label class="text-sm font-medium block mb-1">Diskon (%)</label><input type="number" id="pD" value="${p?p.discount||'':''}" placeholder="0" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Batal</button><button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-blue-700">Simpan</button></div></form></div>`;openModal()}
+function savePr(e,id){e.preventDefault();const n=document.getElementById('pN').value,pr=parseInt(document.getElementById('pP').value),u=document.getElementById('pU').value,c=document.getElementById('pC').value,d=parseInt(document.getElementById('pD').value)||0;if(id){const p=P.find(x=>x.id===id);if(p){p.name=n;p.price=pr;p.unit=u;p.cat=c;p.discount=d}}else P.push({id:Date.now(),name:n,price:pr,unit:u,cat:c,discount:d});SD('pricing',P);closeModal();renderAdmin('harga');showToast('Harga disimpan!','success')}
+function delPr(id){if(!confirm('Hapus?'))return;P=P.filter(x=>x.id!==id);SD('pricing',P);renderAdmin('harga');showToast('Dihapus','info')}
+
+function rAOrd(){return`<div class="flex justify-between items-center mb-6"><p class="text-slate-500 text-sm">${O.length} pesanan</p><button onclick="openOrdM()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Tambah</button></div><div class="bg-white rounded-2xl border border-gray-100 overflow-x-auto"><table class="w-full min-w-[700px]"><thead class="bg-slate-50"><tr><th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">ID</th><th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Pelanggan</th><th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Layanan</th><th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Total</th><th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Status</th><th class="text-center px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Aksi</th></tr></thead><tbody class="divide-y divide-gray-50">${O.map(o=>`<tr class="hover:bg-slate-50/50"><td class="px-4 py-3 text-xs font-mono text-blue-600">${o.id}</td><td class="px-4 py-3"><p class="text-sm font-medium">${o.customer}</p><p class="text-xs text-slate-400">${o.phone}</p></td><td class="px-4 py-3 text-sm">${o.service} (${o.qty}${o.unit})</td><td class="px-4 py-3 text-sm font-semibold">Rp${o.total.toLocaleString('id-ID')}</td><td class="px-4 py-3"><span class="status-badge ${stC(o.status)}">${o.status}</span></td><td class="px-4 py-3 text-center"><div class="flex justify-center gap-1"><button onclick="openOrdM('${o.id}')" class="p-1.5 rounded-lg hover:bg-blue-50 text-slate-400 hover:text-blue-600"><i data-lucide="eye" class="w-4 h-4"></i></button><button onclick="nxSt('${o.id}')" class="p-1.5 rounded-lg hover:bg-green-50 text-slate-400 hover:text-green-600"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button><button onclick="delOrd('${o.id}')" class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td></tr>`).join('')}</tbody></table></div>`}
+function openOrdM(id){const o=id?O.find(x=>x.id===id):null;document.getElementById('modalBody').innerHTML=`<div class="p-6"><h3 class="font-poppins font-semibold text-xl mb-6">${o?'Detail':'Tambah'} Pesanan</h3><form onsubmit="saveOrd(event,'${o?o.id:''}')"><div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">Nama</label><input id="oC" value="${o?o.customer:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">WhatsApp</label><input id="oP" value="${o?o.phone:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div><div class="grid grid-cols-3 gap-4"><div><label class="text-sm font-medium block mb-1">Layanan</label><select id="oS" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm">${P.map(p=>`<option ${o&&o.service===p.name?'selected':''}>${p.name}</option>`).join('')}</select></div><div><label class="text-sm font-medium block mb-1">Jumlah</label><input type="number" id="oQ" value="${o?o.qty:1}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Satuan</label><input id="oU" value="${o?o.unit:'Kg'}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div>${o?`<div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">Total</label><input type="number" id="oT" value="${o.total}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Status</label><select id="oSt" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"><option ${o.status==='Diproses'?'selected':''}>Diproses</option><option ${o.status==='Dicuci'?'selected':''}>Dicuci</option><option ${o.status==='Selesai'?'selected':''}>Selesai</option><option ${o.status==='Diambil'?'selected':''}>Diambil</option></select></div></div>`:''}<div><label class="text-sm font-medium block mb-1">Catatan</label><textarea id="oN" rows="2" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none">${o?o.note:''}</textarea></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Batal</button><button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-blue-700">Simpan</button></div></form></div>`;openModal()}
+function saveOrd(e,oid){e.preventDefault();const cu=document.getElementById('oC').value,ph=document.getElementById('oP').value,sv=document.getElementById('oS').value,qt=parseInt(document.getElementById('oQ').value),un=document.getElementById('oU').value,nt=document.getElementById('oN').value;if(oid){const o=O.find(x=>x.id===oid);if(o){o.customer=cu;o.phone=ph;o.service=sv;o.qty=qt;o.unit=un;o.total=parseInt(document.getElementById('oT')?.value||o.total);o.status=document.getElementById('oSt')?.value||o.status;o.note=nt}}else{const pr=P.find(p=>p.name===sv);O.unshift({id:'ORD-'+Date.now().toString().slice(-6),customer:cu,phone:ph,service:sv,qty:qt,unit:un,total:pr?pr.price*qt:0,status:'Diproses',note:nt,date:new Date().toISOString().slice(0,10)})}SD('orders',O);closeModal();renderAdmin('pesanan');showToast('Pesanan disimpan!','success')}
+function nxSt(id){const o=O.find(x=>x.id===id);if(!o)return;const fl=['Diproses','Dicuci','Selesai','Diambil'],i=fl.indexOf(o.status);if(i<fl.length-1){o.status=fl[i+1];SD('orders',O);renderAdmin('pesanan');showToast('Status → '+o.status,'success')}else showToast('Sudah selesai','info')}
+function delOrd(id){if(!confirm('Hapus pesanan?'))return;O=O.filter(x=>x.id!==id);SD('orders',O);renderAdmin('pesanan');showToast('Dihapus','info')}
+
+function rACust(){return`<div class="flex justify-between items-center mb-6"><p class="text-slate-500 text-sm">${C.length} pelanggan</p><button onclick="openCuM()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Tambah</button></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">${C.map(c=>`<div class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-all"><div class="flex items-center gap-3 mb-3"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold">${c.name.charAt(0)}</div><div><p class="font-semibold">${c.name}</p><p class="text-xs text-slate-400">${c.phone}</p></div></div><div class="grid grid-cols-2 gap-2 text-xs"><div class="bg-blue-50 rounded-lg p-2"><p class="text-blue-600 font-semibold">${c.totalOrders} pesanan</p><p class="text-slate-400">Total</p></div><div class="bg-green-50 rounded-lg p-2"><p class="text-green-600 font-semibold">Rp${(c.totalSpent/1000).toFixed(0)}K</p><p class="text-slate-400">Belanja</p></div></div><div class="flex gap-2 mt-3"><button onclick="openCuM(${c.id})" class="flex-1 py-2 rounded-lg text-xs font-medium bg-blue-50 text-blue-600 hover:bg-blue-100">Edit</button><button onclick="delCu(${c.id})" class="py-2 px-3 rounded-lg text-xs font-medium bg-red-50 text-red-600 hover:bg-red-100">Hapus</button></div></div>`).join('')}</div>`}
+function openCuM(id){const c=id?C.find(x=>x.id===id):null;document.getElementById('modalBody').innerHTML=`<div class="p-6"><h3 class="font-poppins font-semibold text-xl mb-6">${c?'Edit':'Tambah'} Pelanggan</h3><form onsubmit="saveCu(event,${id||0})"><div class="space-y-4"><div><label class="text-sm font-medium block mb-1">Nama</label><input id="cN" value="${c?c.name:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">HP</label><input id="cP" value="${c?c.phone:''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Email</label><input type="email" id="cE" value="${c?c.email:''}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Batal</button><button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-blue-700">Simpan</button></div></form></div>`;openModal()}
+function saveCu(e,id){e.preventDefault();const n=document.getElementById('cN').value,ph=document.getElementById('cP').value,em=document.getElementById('cE').value;if(id){const c=C.find(x=>x.id===id);if(c){c.name=n;c.phone=ph;c.email=em}}else C.push({id:Date.now(),name:n,phone:ph,email:em,totalOrders:0,totalSpent:0,joinDate:new Date().toISOString().slice(0,10)});SD('customers',C);closeModal();renderAdmin('pelanggan');showToast('Pelanggan disimpan!','success')}
+function delCu(id){if(!confirm('Hapus?'))return;C=C.filter(x=>x.id!==id);SD('customers',C);renderAdmin('pelanggan');showToast('Dihapus','info')}
+
+function rAArt(){return`<div class="flex justify-between items-center mb-6"><p class="text-slate-500 text-sm">${A.length} artikel</p><button onclick="openArM()" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Tambah</button></div><div class="grid md:grid-cols-2 gap-4">${A.map(a=>`<div class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-all"><div class="flex items-center gap-2 mb-2"><span class="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">${a.cat}</span><span class="text-xs text-slate-400">${a.date}</span></div><h4 class="font-semibold mb-1">${a.title}</h4><p class="text-slate-500 text-xs line-clamp-2">${a.desc}</p><div class="flex gap-2 mt-3"><button onclick="openArM(${a.id})" class="flex-1 py-2 rounded-lg text-xs font-medium bg-blue-50 text-blue-600 hover:bg-blue-100">Edit</button><button onclick="delAr(${a.id})" class="py-2 px-3 rounded-lg text-xs font-medium bg-red-50 text-red-600 hover:bg-red-100">Hapus</button></div></div>`).join('')}</div>`}
+function openArM(id){const a=id?A.find(x=>x.id===id):null;document.getElementById('modalBody').innerHTML=`<div class="p-6"><h3 class="font-poppins font-semibold text-xl mb-6">${a?'Edit':'Tambah'} Artikel</h3><form onsubmit="saveAr(event,${id||0})"><div class="space-y-4"><div><label class="text-sm font-medium block mb-1">Judul</label><input id="aT" value="${a?a.title.replace(/"/g,'&quot;'):''}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">Kategori</label><select id="aC" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"><option ${a&&a.cat==='Tips'?'selected':''}>Tips</option><option ${a&&a.cat==='Tutorial'?'selected':''}>Tutorial</option><option ${a&&a.cat==='Informasi'?'selected':''}>Informasi</option></select></div><div><label class="text-sm font-medium block mb-1">Tanggal</label><input id="aDt" value="${a?a.date:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div><div><label class="text-sm font-medium block mb-1">Deskripsi</label><textarea id="aD" rows="2" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none">${a?a.desc:''}</textarea></div><div><label class="text-sm font-medium block mb-1">Konten (HTML)</label><textarea id="aCo" rows="5" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none font-mono text-xs">${a?a.content.replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}</textarea></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">SEO Title</label><input id="aST" value="${a?a.seoTitle||'':''}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">SEO Desc</label><input id="aSD" value="${a?a.seoDesc||'':''}" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div></div><div class="flex gap-3 mt-6"><button type="button" onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Batal</button><button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-blue-700">Simpan</button></div></form></div>`;openModal()}
+function saveAr(e,id){e.preventDefault();const ti=document.getElementById('aT').value,ca=document.getElementById('aC').value,dt=document.getElementById('aDt').value,de=document.getElementById('aD').value,co=document.getElementById('aCo').value.replace(/&lt;/g,'<').replace(/&gt;/g,'>'),st=document.getElementById('aST').value,sd=document.getElementById('aSD').value;if(id){const a=A.find(x=>x.id===id);if(a){a.title=ti;a.cat=ca;a.date=dt;a.desc=de;a.content=co;a.seoTitle=st;a.seoDesc=sd}}else A.unshift({id:Date.now(),title:ti,cat:ca,date:dt,desc:de,content:co,seoTitle:st,seoDesc:sd});SD('articles',A);closeModal();renderAdmin('artikel');showToast('Artikel disimpan!','success')}
+function delAr(id){if(!confirm('Hapus artikel?'))return;A=A.filter(x=>x.id!==id);SD('articles',A);renderAdmin('artikel');showToast('Dihapus','info')}
+
+function rASet(){return`<div class="max-w-2xl"><div class="bg-white rounded-2xl border border-gray-100 p-8"><h3 class="font-poppins font-semibold text-xl mb-6 flex items-center gap-2"><i data-lucide="settings" class="w-5 h-5 text-blue-500"></i>Pengaturan</h3><form onsubmit="saveSett(event)"><div class="space-y-5"><div><label class="text-sm font-medium block mb-1">Nama Usaha</label><input id="sN" value="${SET.name}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Alamat</label><textarea id="sA" rows="2" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none">${SET.address}</textarea></div><div class="grid grid-cols-2 gap-4"><div><label class="text-sm font-medium block mb-1">WhatsApp</label><input id="sP" value="${SET.phone}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div><div><label class="text-sm font-medium block mb-1">Jam Operasional</label><input id="sH" value="${SET.hours}" required class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm"></div></div></div><button type="submit" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 flex items-center gap-2"><i data-lucide="save" class="w-4 h-4"></i>Simpan</button></form></div><div class="bg-white rounded-2xl border border-gray-100 p-8 mt-6"><h3 class="font-semibold text-lg mb-4 flex items-center gap-2 text-red-600"><i data-lucide="alert-triangle" class="w-5 h-5"></i>Zona Bahaya</h3><p class="text-slate-500 text-sm mb-4">Reset semua data ke default.</p><button onclick="resetAll()" class="bg-red-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-700">Reset Data</button></div></div>`}
+function saveSett(e){e.preventDefault();SET.name=document.getElementById('sN').value;SET.address=document.getElementById('sA').value;SET.phone=document.getElementById('sP').value;SET.hours=document.getElementById('sH').value;SD('settings',SET);showToast('Pengaturan disimpan!','success')}
+function resetAll(){if(!confirm('PERINGATAN: Semua data akan direset!'))return;['services','pricing','articles','testimonials','orders','customers','settings'].forEach(k=>localStorage.removeItem('blk_'+k));S=JSON.parse(JSON.stringify(DEF.services));P=JSON.parse(JSON.stringify(DEF.pricing));A=JSON.parse(JSON.stringify(DEF.articles));T=JSON.parse(JSON.stringify(DEF.testimonials));O=JSON.parse(JSON.stringify(DEF.orders));C=JSON.parse(JSON.stringify(DEF.customers));SET=JSON.parse(JSON.stringify(DEF.settings));renderAdmin('pengaturan');showToast('Data direset!','info')}
+
+function showToast(m,t){const e=document.getElementById('toast');e.className='toast toast-'+t+' show';e.textContent=m;setTimeout(()=>e.classList.remove('show'),3000)}
+function openModal(){document.getElementById('modal').classList.add('active')}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+function initAnims(){const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.fade-up').forEach(el=>{if(!el.classList.contains('visible'))obs.observe(el)})}
+
+document.addEventListener('DOMContentLoaded',()=>{lucide.createIcons();renderHome();initAnims()});
+</script>
+</body>
+</html>
